@@ -21,7 +21,7 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert status == 200
     assert len(result['pets']) > 0
 
-def test_add_pets_with_valid_data(name='Fedor', animal_type='cat', age='3', pet_photo='images/Fedor.jpg'):
+def test_add_pets_with_valid_data(name='Godzilla', animal_type='kaidzu', age='100', pet_photo='images/godzilla.jpg'):
     '''Проверяем что код статуса запроса 200 и что список с добавленными данными не пустой для этого
     в переменную pet_photo сохраняем путь к файлу фотографии питомца, сохраняем ключ в переменную api_key,
     проверяем статус ответа и что в ответе содержатся добавленные данные.
@@ -39,7 +39,7 @@ def test_delete_pet():
     _, my_pets = pf.get_list_of_pets(api_key, 'my_pets')
 
     if len(my_pets['pets']) == 0:
-        pf.add_new_pets(api_key, 'Murzik', 'cat', '5', 'images/Fedor.jpg')
+        pf.add_new_pets(api_key, 'Kiryu', 'kaidzu', '99', 'images/godzilla.jpg')
         _, my_pets = pf.get_list_of_pets(api_key, 'my_pets')
 
     pet_id = my_pets['pets'][0]['id']
@@ -50,7 +50,7 @@ def test_delete_pet():
     assert status == 200
     assert pet_id not in my_pets.values()
 
-def test_update_pet_info(name='из', animal_type='измененный', age='5'):
+def test_update_pet_info(name='из', animal_type='измененный', age='88'):
     '''Проверяем возможность изменения данных питомца'''
     _, api_key = pf.get_app_key(valid_email, valid_password)
     _, my_pets = pf.get_list_of_pets(api_key, 'my_pets')
@@ -62,7 +62,7 @@ def test_update_pet_info(name='из', animal_type='измененный', age='5
     else:
         raise Exception("Питомцы отсутствуют")
 
-def test_add_pets_with_valid_data_without_photo(name='МурзикБезФото', animal_type='кот', age='6'):
+def test_add_pets_with_valid_data_without_photo(name='Mothra', animal_type='kaidzu', age='77'):
     '''Проверяем возможность добавления нового питомца без фото'''
     _, api_key = pf.get_app_key(valid_email, valid_password)
     status, result = pf.add_new_pet_without_photo(api_key, name, animal_type, age)
@@ -70,7 +70,7 @@ def test_add_pets_with_valid_data_without_photo(name='МурзикБезФото
     assert status == 200
     assert result['name'] == name
 
-def test_add_photo_at_pet(pet_photo='images/German.jpg'):
+def test_add_photo_at_pet(pet_photo='images/mothra.jpg'):
     '''Проверяем возможность добавления новой фотографии питомца'''
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
 
